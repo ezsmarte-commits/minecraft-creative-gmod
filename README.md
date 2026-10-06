@@ -76,4 +76,4 @@ python3 tests/test_preflight.py        # preflight catches broken sheets
 - Minecraft, its textures and sounds © Mojang Studios. They are read from the player's own copy
   and never distributed.
 - Garry's Mod © Facepunch Studios.
-- Mod: see the listing for author, licence and remix permissions.
+- Mod code: MIT licence (see LICENSE). Remixes welcome.
