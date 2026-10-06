@@ -300,25 +300,47 @@ def gen(sh):
 
 
 def package(version):
-    exe = os.path.join(ADDON, "helper", "mcc-assets.exe")
+    """Release zip laid out for Melty's recipe (tools/melty_recipe.json):
+       addons/minecraft_creative/...  -> {game}/garrysmod/addons
+       helper/mcc-assets.exe          -> {managed}/helper
+       README.md, CREDITS.md          -> the add-on folder
+    Also writes dist/recipe-<version>.json and dist/entries-<version>.json for Melty's checks."""
+    dist = os.path.join(ROOT, "dist")
+    os.makedirs(dist, exist_ok=True)
+    exe = os.path.join(dist, "mcc-assets.exe")
     env = dict(os.environ, GOOS="windows", GOARCH="amd64", CGO_ENABLED="0")
     subprocess.run(["go", "build", "-trimpath", "-ldflags", f"-s -w -X main.version={version}", "-o", exe, "."],
                    cwd=HELPER_SRC, env=env, check=True)
-    os.makedirs(os.path.join(ROOT, "dist"), exist_ok=True)
-    out = os.path.join(ROOT, "dist", f"minecraft_creative-{version}.zip")
+    out = os.path.join(dist, f"minecraft_creative-{version}.zip")
     skip_dirs = {"materials", "sound"}  # filled at launch from the player's own Minecraft
-    with zipfile.ZipFile(out, "w", zipfile.ZIP_DEFLATED) as z:
-        for base, dirs, names in os.walk(ADDON):
-            rel = os.path.relpath(base, ADDON)
-            if rel.split(os.sep)[0] in skip_dirs:
+    files = []
+    for base, dirs, names in os.walk(ADDON):
+        dirs.sort()
+        rel = os.path.relpath(base, ADDON)
+        if rel.split(os.sep)[0] in skip_dirs:
+            continue
+        for n in sorted(names):
+            if n == "last_run.txt" or n.endswith(".exe"):
                 continue
-            for n in sorted(names):
-                if n in ("last_run.txt",):
-                    continue
-                p = os.path.join(base, n)
-                z.write(p, os.path.join("minecraft_creative", os.path.relpath(p, ADDON)))
+            p = os.path.join(base, n)
+            files.append((p, "addons/minecraft_creative/" + os.path.relpath(p, ADDON).replace(os.sep, "/")))
+    files.append((exe, "helper/mcc-assets.exe"))
+    files.append((os.path.join(ROOT, "README.md"), "README.md"))
+    files.append((os.path.join(ROOT, "CREDITS.md"), "CREDITS.md"))
+    entries = []
+    fixed = (2026, 1, 1, 0, 0, 0)  # stable timestamps: same input, same zip
+    with zipfile.ZipFile(out, "w", zipfile.ZIP_DEFLATED) as z:
+        for src, arc in files:
+            data = open(src, "rb").read()
+            z.writestr(zipfile.ZipInfo(arc, fixed), data, zipfile.ZIP_DEFLATED)
+            entries.append({"path": arc, "size": len(data)})
+    recipe = open(os.path.join(ROOT, "tools", "melty_recipe.json")).read().replace("{version}", version)
+    with open(os.path.join(dist, f"recipe-{version}.json"), "w") as fh:
+        fh.write(recipe)
+    with open(os.path.join(dist, f"entries-{version}.json"), "w") as fh:
+        json.dump(entries, fh, indent=1)
     data = open(out, "rb").read()
-    print(f"package: {out} {len(data)} bytes sha256 {hashlib.sha256(data).hexdigest()}")
+    print(f"package: {out} {len(data)} bytes sha256 {hashlib.sha256(data).hexdigest()} ({len(entries)} files)")
 
 
 if __name__ == "__main__":

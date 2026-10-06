@@ -1,0 +1,80 @@
+{
+  "schemaVersion": 1,
+  "mode": "installed",
+  "games": [
+    {
+      "slug": "garrys-mod",
+      "role": "primary"
+    },
+    {
+      "slug": "minecraft-java",
+      "role": "secondary"
+    }
+  ],
+  "components": [
+    {
+      "id": "main",
+      "fileName": "minecraft_creative-{version}.zip",
+      "label": "Minecraft Creative gamemode and Minecraft asset helper",
+      "kind": "main",
+      "required": true
+    }
+  ],
+  "requirements": [],
+  "mappings": [
+    {
+      "component": "main",
+      "from": "addons/",
+      "to": "{game}/garrysmod/addons"
+    },
+    {
+      "component": "main",
+      "from": "helper/",
+      "to": "{managed}/helper"
+    },
+    {
+      "component": "main",
+      "from": "README.md",
+      "to": "{game}/garrysmod/addons/minecraft_creative"
+    },
+    {
+      "component": "main",
+      "from": "CREDITS.md",
+      "to": "{game}/garrysmod/addons/minecraft_creative"
+    }
+  ],
+  "setup": {
+    "label": "Minecraft blocks",
+    "launch": {
+      "kind": "exe",
+      "path": "{managed}/helper/mcc-assets.exe",
+      "args": [
+        "-addon",
+        "{game}/garrysmod/addons/minecraft_creative",
+        "-done",
+        "{game}/garrysmod/addons/minecraft_creative/materials/mcc/ready-{version}.txt"
+      ]
+    },
+    "done": {
+      "file": "{game}/garrysmod/addons/minecraft_creative/materials/mcc/ready-{version}.txt"
+    },
+    "stopWhenDone": true
+  },
+  "launch": {
+    "kind": "exe",
+    "path": "{game}/gmod.exe",
+    "cwd": "{game}",
+    "args": [
+      "-steam",
+      "+maxplayers",
+      "1",
+      "+gamemode",
+      "mccreative",
+      "+map",
+      "gm_flatgrass"
+    ]
+  },
+  "notes": {
+    "firstLaunch": "The first Play copies 25 block textures and 56 sounds from your own Minecraft Java Edition (1.13 or newer, played once) into the mod. It takes a few seconds and happens once per version."
+  }
+}

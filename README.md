@@ -48,11 +48,18 @@ None of Minecraft's files are included with this mod. When you press Play, a sma
 Minecraft install into the mod's folder. Without Minecraft, the mod still runs with plain
 coloured blocks and Garry's Mod sounds, and shows a message saying so.
 
-## How it starts
-Run `helper/mcc-assets.exe` (it finds `%APPDATA%\.minecraft` by itself; `-minecraft <folder>`
-overrides), then start Garry's Mod with `+gamemode mccreative +map gm_flatgrass`.
+## How to play
+Press **Play** on its Melty page. Melty installs the gamemode, copies the textures and sounds
+from your own Minecraft on the first Play (a few seconds), and starts Garry's Mod straight into
+Minecraft Creative on gm_flatgrass.
 
 ## For developers
+Melty's install recipe is `tools/melty_recipe.json`; `build.py package` fills in the version and
+writes the release zip with the add-on under `addons/` and the helper under `helper/`.
+To run it without Melty: copy `addons/minecraft_creative` into `garrysmod/addons`, run
+`helper/mcc-assets.exe -addon <that folder>`, then start Garry's Mod with
+`+gamemode mccreative +map gm_flatgrass`.
+
 The design lives in `sheets/*.json`: blocks, sound groups, effects, controls, hooks and settings.
 Each row generates code (`lua/mcc/sh_gen_*.lua`); edit the sheet, never the generated file.
 

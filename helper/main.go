@@ -3,7 +3,10 @@
 // can load them. Nothing from Minecraft is shipped with the mod; every player brings
 // their own copy. Run it before Garry's Mod starts; it is quick when already up to date.
 //
-//	mcc-assets.exe [-minecraft DIR] [-addon DIR] [-force] [-strict]
+//	mcc-assets.exe [-minecraft DIR] [-addon DIR] [-done FILE] [-force] [-strict]
+//
+// -done names a file written when the helper finishes, whatever happened (Melty waits for it
+// before starting the game). Without Minecraft the game still runs, with plain-coloured blocks.
 package main
 
 import (
@@ -25,6 +28,8 @@ import (
 )
 
 var version = "dev"
+
+var doneFile string // written on every finish, so a launcher waiting for it never hangs
 
 type manifest struct {
 	textures []string
@@ -52,6 +57,7 @@ func main() {
 	addonFlag := flag.String("addon", "", "Add-on folder (default: the folder above this program)")
 	force := flag.Bool("force", false, "copy again even if up to date")
 	strict := flag.Bool("strict", false, "exit with an error if anything is missing")
+	flag.StringVar(&doneFile, "done", "", "file to write when finished (any outcome)")
 	flag.Parse()
 
 	addon := *addonFlag
@@ -90,7 +96,7 @@ func main() {
 	stamp := "version=" + v.ID + "\nmanifest=" + m.hash + "\n"
 	if !*force && upToDate(addon, m, stampPath, stamp) {
 		log.printf("already up to date")
-		return
+		exit(*strict, 0)
 	}
 
 	missing := 0
@@ -116,13 +122,20 @@ func main() {
 			log.printf("could not write %s: %v", stampPath, err)
 		}
 		log.printf("done")
-		return
+		exit(*strict, 0)
 	}
 	log.printf("done with %d missing files; those use plain colours or Garry's Mod sounds", missing)
 	exit(*strict, 5)
 }
 
 func exit(strict bool, code int) {
+	if doneFile != "" {
+		status := "ok"
+		if code != 0 {
+			status = fmt.Sprintf("finished with problems (code %d); see helper/last_run.txt", code)
+		}
+		_ = writeFile(doneFile, []byte("mcc-assets "+version+": "+status+"\n"))
+	}
 	if strict {
 		os.Exit(code)
 	}

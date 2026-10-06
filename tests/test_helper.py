@@ -98,6 +98,13 @@ def main():
 
     code, out = run(exe, addon, "-minecraft", os.path.join(work, "nope"))
     check("no Minecraft: explains, and still lets the game start (exit 0)", code == 0 and "not found" in out, out)
+    done = os.path.join(work, "done", "ready.txt")
+    code, out = run(exe, addon, "-minecraft", os.path.join(work, "nope"), "-done", done)
+    check("no Minecraft still writes the done file, so Melty never waits forever",
+          code == 0 and os.path.exists(done) and "problems" in open(done).read(), out)
+    os.remove(done)
+    code, out = run(exe, addon, "-minecraft", mc, "-done", done)
+    check("done file says ok after a good run", os.path.exists(done) and ": ok" in open(done).read(), out)
     code, _ = run(exe, addon, "-minecraft", os.path.join(work, "nope"), "-strict")
     check("no Minecraft with -strict: exit code 2", code == 2)
 

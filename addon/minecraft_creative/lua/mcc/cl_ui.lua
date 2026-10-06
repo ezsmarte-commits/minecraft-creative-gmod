@@ -207,7 +207,7 @@ function MCC.DrawHUD()
 	end
 
 	if not MCC.HasMinecraftTextures() then
-		local msg = "Minecraft textures not found: blocks are shown in plain colours. Play from Melty with Minecraft Java Edition installed and launched at least once."
+		local msg = "Minecraft textures not found: blocks are shown in plain colours. Install Minecraft Java Edition, play it once, then reinstall this mashup in Melty."
 		surface.SetFont("DermaDefaultBold")
 		local tw = surface.GetTextSize(msg)
 		draw.RoundedBox(4, sw / 2 - tw / 2 - 10, 14, tw + 20, 26, Color(120, 30, 30, 200))
