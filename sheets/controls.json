@@ -1,0 +1,206 @@
+{
+  "sheet": "controls",
+  "about": "One row per player control. input is the Garry's Mod bind command the key runs (so it follows the player's own key bindings), or mouse_middle / double_jump for inputs polled by the mod. handled_by says which code catches it: swep (the Block Hand weapon), bind (client bind hook), poll (client Think), keypress (server KeyPress). when: hand = only while holding the Block Hand, physgun = only while holding the Physics Gun (R stays GMod's unfreeze there), always. action must name a function in MCC.Actions. arg is passed to it (none = no argument). hint is the on-screen help text; none hides the row from the help.",
+  "columns": [
+    "id",
+    "input",
+    "handled_by",
+    "when",
+    "action",
+    "arg",
+    "default_key",
+    "hint"
+  ],
+  "rows": [
+    {
+      "id": "break",
+      "input": "+attack",
+      "handled_by": "swep",
+      "when": "hand",
+      "action": "Break",
+      "arg": "none",
+      "default_key": "Left mouse",
+      "hint": "Break block (crouch to break TNT without lighting it)"
+    },
+    {
+      "id": "place",
+      "input": "+attack2",
+      "handled_by": "swep",
+      "when": "hand",
+      "action": "Place",
+      "arg": "none",
+      "default_key": "Right mouse",
+      "hint": "Place block"
+    },
+    {
+      "id": "pick",
+      "input": "mouse_middle",
+      "handled_by": "poll",
+      "when": "hand",
+      "action": "PickBlock",
+      "arg": "none",
+      "default_key": "Middle mouse",
+      "hint": "Pick the block you're looking at"
+    },
+    {
+      "id": "hotbar1",
+      "input": "slot1",
+      "handled_by": "bind",
+      "when": "hand",
+      "action": "HotbarSlot",
+      "arg": 1,
+      "default_key": "1",
+      "hint": "Choose hotbar slot (also 2-9 and mouse wheel)"
+    },
+    {
+      "id": "hotbar2",
+      "input": "slot2",
+      "handled_by": "bind",
+      "when": "hand",
+      "action": "HotbarSlot",
+      "arg": 2,
+      "default_key": "2",
+      "hint": "none"
+    },
+    {
+      "id": "hotbar3",
+      "input": "slot3",
+      "handled_by": "bind",
+      "when": "hand",
+      "action": "HotbarSlot",
+      "arg": 3,
+      "default_key": "3",
+      "hint": "none"
+    },
+    {
+      "id": "hotbar4",
+      "input": "slot4",
+      "handled_by": "bind",
+      "when": "hand",
+      "action": "HotbarSlot",
+      "arg": 4,
+      "default_key": "4",
+      "hint": "none"
+    },
+    {
+      "id": "hotbar5",
+      "input": "slot5",
+      "handled_by": "bind",
+      "when": "hand",
+      "action": "HotbarSlot",
+      "arg": 5,
+      "default_key": "5",
+      "hint": "none"
+    },
+    {
+      "id": "hotbar6",
+      "input": "slot6",
+      "handled_by": "bind",
+      "when": "hand",
+      "action": "HotbarSlot",
+      "arg": 6,
+      "default_key": "6",
+      "hint": "none"
+    },
+    {
+      "id": "hotbar7",
+      "input": "slot7",
+      "handled_by": "bind",
+      "when": "hand",
+      "action": "HotbarSlot",
+      "arg": 7,
+      "default_key": "7",
+      "hint": "none"
+    },
+    {
+      "id": "hotbar8",
+      "input": "slot8",
+      "handled_by": "bind",
+      "when": "hand",
+      "action": "HotbarSlot",
+      "arg": 8,
+      "default_key": "8",
+      "hint": "none"
+    },
+    {
+      "id": "hotbar9",
+      "input": "slot9",
+      "handled_by": "bind",
+      "when": "hand",
+      "action": "HotbarSlot",
+      "arg": 9,
+      "default_key": "9",
+      "hint": "none"
+    },
+    {
+      "id": "hotbar_next",
+      "input": "invnext",
+      "handled_by": "bind",
+      "when": "hand",
+      "action": "HotbarScroll",
+      "arg": 1,
+      "default_key": "Wheel down",
+      "hint": "none"
+    },
+    {
+      "id": "hotbar_prev",
+      "input": "invprev",
+      "handled_by": "bind",
+      "when": "hand",
+      "action": "HotbarScroll",
+      "arg": -1,
+      "default_key": "Wheel up",
+      "hint": "none"
+    },
+    {
+      "id": "picker",
+      "input": "+use",
+      "handled_by": "bind",
+      "when": "hand",
+      "action": "OpenPicker",
+      "arg": "none",
+      "default_key": "E",
+      "hint": "Open all blocks"
+    },
+    {
+      "id": "physics",
+      "input": "impulse 100",
+      "handled_by": "bind",
+      "when": "hand",
+      "action": "MakePhysics",
+      "arg": "none",
+      "default_key": "F",
+      "hint": "Turn the build you're looking at into physics"
+    },
+    {
+      "id": "swap",
+      "input": "+reload",
+      "handled_by": "bind",
+      "when": "hand",
+      "action": "SwapTool",
+      "arg": "none",
+      "default_key": "R",
+      "hint": "Switch to the Physics Gun (press 1 to come back)"
+    },
+    {
+      "id": "back_to_hand",
+      "input": "slot1",
+      "handled_by": "bind",
+      "when": "physgun",
+      "action": "SwapTool",
+      "arg": "none",
+      "default_key": "1",
+      "hint": "none"
+    },
+    {
+      "id": "fly",
+      "input": "double_jump",
+      "handled_by": "keypress",
+      "when": "always",
+      "action": "ToggleFly",
+      "arg": "none",
+      "default_key": "Space twice",
+      "hint": "Fly (Space up, Ctrl down, Shift faster)"
+    }
+  ]
+}

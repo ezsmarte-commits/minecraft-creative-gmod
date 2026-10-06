@@ -1,0 +1,6 @@
+{
+	"title": "Minecraft Creative",
+	"type": "gamemode",
+	"tags": ["build", "fun"],
+	"ignore": ["helper/*"]
+}

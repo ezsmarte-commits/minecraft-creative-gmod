@@ -1,0 +1,18 @@
+# Garry's Mod hooks the sheets may use, each confirmed on wiki.facepunch.com (checked 2026-10-06).
+InitPostEntity              # GM_Hooks list
+PostCleanupMap              # GM:PostCleanupMap, shared, no args
+PlayerInitialSpawn          # GM_Hooks list
+PlayerLoadout               # GM_Hooks list
+Think                       # GM:Think
+KeyPress                    # GM_Hooks list (predicted)
+Move                        # GM:Move, predicted; returning true suppresses engine movement
+PlayerFootstep              # GM_Hooks list
+PhysgunPickup               # GM_Hooks list
+GravGunPickupAllowed        # GM_Hooks list
+CanTool                     # SANDBOX:CanTool, false blocks the tool gun
+CanProperty                 # GM_Hooks list
+PlayerBindPress             # GM_Hooks list (client)
+PostDrawOpaqueRenderables   # GM:PostDrawOpaqueRenderables (depth, skybox, 3dskybox)
+PostDrawTranslucentRenderables # GM:PostDrawTranslucentRenderables
+HUDPaint                    # GM_Hooks list
+HUDShouldDraw               # GM_Hooks list

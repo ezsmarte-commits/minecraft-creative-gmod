@@ -1,0 +1,7 @@
+"mccreative"
+{
+	"base"		"sandbox"
+	"title"		"Minecraft Creative"
+	"maps"		"^gm_"
+	"menusystem"	"1"
+}

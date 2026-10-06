@@ -1,0 +1,30 @@
+{
+  "sheet": "settings",
+  "about": "Tuning numbers read by the code as MCC.Cfg.<id>.",
+  "columns": ["id", "value", "unit", "description"],
+  "rows": [
+    {"id": "block_size", "value": 40, "unit": "source units", "description": "One block. 40 units makes a Garry's Mod player 1.8 blocks tall, like Minecraft"},
+    {"id": "chunk_size", "value": 16, "unit": "blocks", "description": "Blocks per chunk edge"},
+    {"id": "reach_blocks", "value": 6, "unit": "blocks", "description": "How far you can break and place"},
+    {"id": "max_blocks", "value": 60000, "unit": "blocks", "description": "Most blocks in one world"},
+    {"id": "break_delay", "value": 0.15, "unit": "seconds", "description": "Time between breaks while holding the button"},
+    {"id": "place_delay", "value": 0.2, "unit": "seconds", "description": "Time between places while holding the button"},
+    {"id": "max_physics_blocks", "value": 256, "unit": "blocks", "description": "Most blocks one physics switch converts"},
+    {"id": "max_loose_props", "value": 400, "unit": "props", "description": "Most block props at once; the oldest are removed past this"},
+    {"id": "prop_shrink", "value": 0.5, "unit": "source units", "description": "Gap left on each side of a block prop so stacked props don't jam"},
+    {"id": "jump_power", "value": 250, "unit": "source units/s", "description": "Jump speed; about 1.25 blocks high at default gravity"},
+    {"id": "double_tap_window", "value": 0.3, "unit": "seconds", "description": "Two jump presses within this toggle flying"},
+    {"id": "fly_speed", "value": 330, "unit": "source units/s", "description": "Flying speed"},
+    {"id": "fly_sprint_speed", "value": 660, "unit": "source units/s", "description": "Flying speed holding sprint"},
+    {"id": "fly_accel", "value": 0.25, "unit": "fraction per tick", "description": "How quickly flight reaches its target speed"},
+    {"id": "tnt_fuse", "value": 4, "unit": "seconds", "description": "TNT fuse after lighting"},
+    {"id": "tnt_chain_fuse_min", "value": 0.5, "unit": "seconds", "description": "Shortest fuse for TNT set off by another explosion"},
+    {"id": "tnt_chain_fuse_max", "value": 1.5, "unit": "seconds", "description": "Longest fuse for TNT set off by another explosion"},
+    {"id": "tnt_radius", "value": 4, "unit": "blocks", "description": "Blocks inside this radius are blasted loose"},
+    {"id": "tnt_max_props", "value": 60, "unit": "props", "description": "Blasted blocks that fly as props; the rest are destroyed"},
+    {"id": "tnt_damage", "value": 120, "unit": "damage", "description": "Explosion damage at the centre"},
+    {"id": "tnt_fling_speed", "value": 550, "unit": "source units/s", "description": "How hard blasted blocks are thrown"},
+    {"id": "mesh_rebuilds_per_frame", "value": 4, "unit": "chunks", "description": "Chunk meshes rebuilt per frame on the client"},
+    {"id": "help_seconds", "value": 20, "unit": "seconds", "description": "How long the controls help shows after spawning"}
+  ]
+}

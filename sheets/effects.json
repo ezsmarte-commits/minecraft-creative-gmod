@@ -1,0 +1,9 @@
+{
+  "sheet": "effects",
+  "about": "One-off sounds that are not tied to a block family. Same key and fallback rules as sound_groups.",
+  "columns": ["id", "sounds", "fallback", "level", "pitch"],
+  "rows": [
+    {"id": "tnt_fuse", "sounds": ["random/fuse"], "fallback": "ambient/fire/ignite.wav", "level": 75, "pitch": 100},
+    {"id": "explosion", "sounds": ["random/explode1", "random/explode2", "random/explode3", "random/explode4"], "fallback": "weapons/explode3.wav", "level": 100, "pitch": 100}
+  ]
+}

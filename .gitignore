@@ -1,0 +1,7 @@
+build/
+dist/
+__pycache__/
+addon/minecraft_creative/materials/
+addon/minecraft_creative/sound/
+addon/minecraft_creative/helper/*.exe
+addon/minecraft_creative/helper/last_run.txt

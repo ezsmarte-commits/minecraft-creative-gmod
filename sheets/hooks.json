@@ -1,0 +1,158 @@
+{
+  "sheet": "hooks",
+  "about": "One row per place the mod hooks into Garry's Mod. hook is the GMod hook name, realm where it is added (server, client, shared), fn the MCC function it calls (must exist in the handwritten code), returns says whether the hook's return value is passed back (yes) or dropped (no).",
+  "columns": [
+    "id",
+    "hook",
+    "realm",
+    "fn",
+    "returns",
+    "purpose"
+  ],
+  "rows": [
+    {
+      "id": "setup_world",
+      "hook": "InitPostEntity",
+      "realm": "server",
+      "fn": "SetupWorld",
+      "returns": "no",
+      "purpose": "Anchor the block grid to the floor under the map's spawn point"
+    },
+    {
+      "id": "cleanup",
+      "hook": "PostCleanupMap",
+      "realm": "server",
+      "fn": "ResetWorld",
+      "returns": "no",
+      "purpose": "Sandbox 'clean up everything' also clears blocks"
+    },
+    {
+      "id": "send_world",
+      "hook": "PlayerInitialSpawn",
+      "realm": "server",
+      "fn": "SendWorld",
+      "returns": "no",
+      "purpose": "Send existing blocks to a player who joins"
+    },
+    {
+      "id": "loadout",
+      "hook": "PlayerLoadout",
+      "realm": "server",
+      "fn": "PlayerLoadout",
+      "returns": "yes",
+      "purpose": "Give the Block Hand, physics gun and tool gun; set Minecraft jump height"
+    },
+    {
+      "id": "server_think",
+      "hook": "Think",
+      "realm": "server",
+      "fn": "ServerThink",
+      "returns": "no",
+      "purpose": "Rebuild changed chunk collision once per tick"
+    },
+    {
+      "id": "jump_tap",
+      "hook": "KeyPress",
+      "realm": "server",
+      "fn": "KeyPress",
+      "returns": "no",
+      "purpose": "Double-tap jump toggles flying"
+    },
+    {
+      "id": "fly_move",
+      "hook": "Move",
+      "realm": "shared",
+      "fn": "FlyMove",
+      "returns": "yes",
+      "purpose": "Creative-style flight: replaces engine movement while flying, with our own collision"
+    },
+    {
+      "id": "footsteps",
+      "hook": "PlayerFootstep",
+      "realm": "shared",
+      "fn": "Footstep",
+      "returns": "yes",
+      "purpose": "Minecraft footstep sounds on blocks"
+    },
+    {
+      "id": "no_physgun_chunks",
+      "hook": "PhysgunPickup",
+      "realm": "shared",
+      "fn": "BlockChunkPickup",
+      "returns": "yes",
+      "purpose": "Physics gun cannot grab the block world itself"
+    },
+    {
+      "id": "no_gravgun_chunks",
+      "hook": "GravGunPickupAllowed",
+      "realm": "shared",
+      "fn": "BlockChunkPickup",
+      "returns": "yes",
+      "purpose": "Gravity gun cannot grab the block world itself"
+    },
+    {
+      "id": "no_tool_chunks",
+      "hook": "CanTool",
+      "realm": "shared",
+      "fn": "BlockChunkTool",
+      "returns": "yes",
+      "purpose": "Tool gun cannot weld or remove the block world itself"
+    },
+    {
+      "id": "no_property_chunks",
+      "hook": "CanProperty",
+      "realm": "shared",
+      "fn": "BlockChunkProperty",
+      "returns": "yes",
+      "purpose": "Context menu cannot edit the block world itself"
+    },
+    {
+      "id": "binds",
+      "hook": "PlayerBindPress",
+      "realm": "client",
+      "fn": "BindPress",
+      "returns": "yes",
+      "purpose": "Hotbar, block picker, physics switch and tool swap keys"
+    },
+    {
+      "id": "client_think",
+      "hook": "Think",
+      "realm": "client",
+      "fn": "ClientThink",
+      "returns": "no",
+      "purpose": "Rebuild changed chunk meshes; middle-click pick block"
+    },
+    {
+      "id": "draw_world",
+      "hook": "PostDrawOpaqueRenderables",
+      "realm": "client",
+      "fn": "DrawWorld",
+      "returns": "no",
+      "purpose": "Draw the block meshes"
+    },
+    {
+      "id": "draw_highlight",
+      "hook": "PostDrawTranslucentRenderables",
+      "realm": "client",
+      "fn": "DrawHighlight",
+      "returns": "no",
+      "purpose": "Outline the targeted block"
+    },
+    {
+      "id": "hud",
+      "hook": "HUDPaint",
+      "realm": "client",
+      "fn": "DrawHUD",
+      "returns": "no",
+      "purpose": "Hotbar, crosshair, help and missing-Minecraft warning"
+    },
+    {
+      "id": "hud_hide",
+      "hook": "HUDShouldDraw",
+      "realm": "client",
+      "fn": "HUDShouldDraw",
+      "returns": "yes",
+      "purpose": "Hide GMod crosshair and weapon picker while holding the Block Hand"
+    }
+  ]
+}
